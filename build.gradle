@@ -29,7 +29,7 @@ minecraft {
 }
 
 dependencies {
-	compile files('lib/bukkit-api.jar', 'lib/WorldGuardEventWrapper.jar', 'lib/buildcraft-7.0.13-dev.jar')
+	compile files('lib/bukkit-api.jar', 'lib/WorldGuardEventWrapper.jar', 'lib/buildcraft-7.0.13-dev.jar', 'lib/ThermalExpansion-[1.7.10]4.0.1-182-dev.jar', 'lib/CoFHCore-[1.7.10]3.0.2-262-dev.jar', 'lib/EnderIO-1.7.10-2.3.0.382_beta-dev.jar')
 }
 
 jar {
