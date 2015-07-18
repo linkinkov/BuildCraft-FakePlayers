@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+
 import cofh.thermalexpansion.block.strongbox.BlockStrongbox;
 import cofh.thermalexpansion.block.cache.BlockCache;
 import crazypants.enderio.machine.vacuum.BlockVacuumChest;
+
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -122,6 +124,7 @@ public final class BlockUtils {
 		world.spawnEntityInWorld(entityitem);
 	}
 
+	@Deprecated
 	public static boolean isAnObstructingBlock(Block block, World world, int x, int y, int z) {
 		if (block == null || block.isAir(world, x, y, z)) {
 			return false;
@@ -142,17 +145,17 @@ public final class BlockUtils {
 			return false;
 		}
 
-		// TODO: Make this support all "heavy" liquids, not just oil/lava
-		if (block instanceof IFluidBlock && ((IFluidBlock) block).getFluid() != null && "oil".equals(((IFluidBlock) block).getFluid().getName())) {
-			return false;
-		}
-		
 		if (block instanceof BlockStrongbox || block instanceof BlockCache || block instanceof BlockVacuumChest) {
 			return false;
-		}
-
+		}		
+		
 		if (block == Blocks.lava || block == Blocks.flowing_lava) {
 			return false;
+		} else if (block instanceof IFluidBlock && ((IFluidBlock) block).getFluid() != null) {
+			Fluid f = ((IFluidBlock) block).getFluid();
+			if (f.getDensity(world, x, y, z) >= 3000) {
+				return false;
+			}
 		}
 
 		return true;
